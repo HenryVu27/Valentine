@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   const flowerCards = document.querySelectorAll('.flower-card');
   const flowerModal = document.querySelector('.flower-modal');
-  const flowerModalCard = document.querySelector('.flower-modal-card');
   const gardenComplete = document.querySelector('.garden-complete');
   const gardenProgress = document.querySelector('.garden-progress');
   let bloomedCount = 0;
@@ -166,7 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
       gardenProgress.textContent = `${bloomedCount} of ${totalFlowers} flowers bloomed`;
     }
     if (bloomedCount >= totalFlowers && gardenComplete) {
-      setTimeout(() => gardenComplete.classList.add('visible'), 500);
+      setTimeout(() => {
+        gardenComplete.classList.add('visible');
+        const btn = gardenComplete.querySelector('.btn-continue');
+        if (btn) btn.classList.add('visible');
+      }, 500);
     }
   }
 
