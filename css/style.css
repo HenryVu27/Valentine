@@ -114,53 +114,58 @@ body {
 /* Floating Petals */
 .petal {
   position: absolute;
-  width: 18px;
-  height: 22px;
+  width: 10px;
+  height: 10px;
   background: var(--pink);
-  border-radius: 50% 0 50% 50%;
+  border-radius: 50%;
   opacity: 0;
   pointer-events: none;
   z-index: 2;
+  filter: blur(0.5px);
 }
 
 .section.active .petal {
-  animation: petalFall linear infinite;
+  animation: petalFloat ease-in-out infinite;
 }
 
-@keyframes petalFall {
+@keyframes petalFloat {
   0% {
     opacity: 0;
-    transform: translateY(-10vh) rotate(0deg) translateX(0px);
+    transform: translateY(-5vh) translateX(0px) scale(0.8);
   }
-  10% {
-    opacity: 0.45;
+  15% {
+    opacity: 0.3;
   }
-  90% {
-    opacity: 0.35;
+  50% {
+    opacity: 0.25;
+    transform: translateY(50vh) translateX(30px) scale(1);
+  }
+  85% {
+    opacity: 0.15;
   }
   100% {
     opacity: 0;
-    transform: translateY(105vh) rotate(360deg) translateX(80px);
+    transform: translateY(105vh) translateX(-20px) scale(0.6);
   }
 }
 
-.petal:nth-child(1) { left: 8%; animation-duration: 11s; animation-delay: 0s; width: 14px; height: 17px; background: var(--blush); }
-.petal:nth-child(2) { left: 25%; animation-duration: 13s; animation-delay: 2s; width: 20px; height: 24px; }
-.petal:nth-child(3) { left: 45%; animation-duration: 10s; animation-delay: 4s; width: 16px; height: 19px; background: var(--blush); }
-.petal:nth-child(4) { left: 65%; animation-duration: 14s; animation-delay: 1s; width: 18px; height: 22px; }
-.petal:nth-child(5) { left: 82%; animation-duration: 12s; animation-delay: 3s; width: 15px; height: 18px; background: var(--blush); }
-.petal:nth-child(6) { left: 55%; animation-duration: 15s; animation-delay: 5s; width: 12px; height: 15px; }
+.petal:nth-child(1) { left: 10%; animation-duration: 14s; animation-delay: 0s; width: 8px; height: 8px; background: rgba(248, 208, 216, 0.6); }
+.petal:nth-child(2) { left: 28%; animation-duration: 18s; animation-delay: 3s; width: 6px; height: 6px; background: rgba(244, 160, 181, 0.4); }
+.petal:nth-child(3) { left: 45%; animation-duration: 16s; animation-delay: 6s; width: 7px; height: 7px; background: rgba(248, 208, 216, 0.5); }
+.petal:nth-child(4) { left: 62%; animation-duration: 20s; animation-delay: 1s; width: 5px; height: 5px; background: rgba(244, 160, 181, 0.35); }
+.petal:nth-child(5) { left: 78%; animation-duration: 15s; animation-delay: 4s; width: 9px; height: 9px; background: rgba(248, 208, 216, 0.45); }
+.petal:nth-child(6) { left: 52%; animation-duration: 22s; animation-delay: 8s; width: 6px; height: 6px; background: rgba(244, 160, 181, 0.3); }
 
 /* Name Text */
 .landing-name {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(2.2rem, 8vw, 3.8rem);
-  color: var(--brown);
+  color: var(--white);
   margin-bottom: 40px;
   opacity: 0;
   transform: translateY(15px);
   transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s;
-  text-shadow: 0 2px 12px rgba(244, 160, 181, 0.3);
+  text-shadow: 0 2px 16px rgba(92, 64, 51, 0.4), 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .section.active .landing-name {
@@ -332,15 +337,16 @@ body {
 .landing-tap-hint {
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
-  color: var(--deep-rose);
+  color: var(--white);
   margin-top: 28px;
   opacity: 0;
   transition: opacity 0.8s ease-out 1s;
   letter-spacing: 0.5px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 .section.active .landing-tap-hint {
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 /* ============================================
@@ -467,12 +473,12 @@ body {
 .garden-title {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(2rem, 7vw, 3rem);
-  color: var(--brown);
+  color: var(--white);
   margin-bottom: 8px;
   opacity: 0;
   transform: translateY(15px);
   transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
-  text-shadow: 0 2px 12px rgba(255, 248, 240, 0.5);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .section.active .garden-title {
@@ -483,15 +489,17 @@ body {
 .garden-subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
-  color: var(--deep-rose);
+  color: var(--cream);
   margin-bottom: 20px;
   opacity: 0;
   transition: opacity 0.8s ease-out 0.4s;
   letter-spacing: 0.3px;
+  font-weight: 500;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6), 0 0px 3px rgba(0, 0, 0, 0.4);
 }
 
 .section.active .garden-subtitle {
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .garden-scroll-container {
@@ -691,8 +699,10 @@ body {
 .garden-progress {
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
-  color: var(--deep-rose);
-  opacity: 0.7;
+  font-weight: 500;
+  color: var(--cream);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6), 0 0px 3px rgba(0, 0, 0, 0.4);
+  opacity: 0.9;
   margin-top: 12px;
 }
 

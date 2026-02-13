@@ -38,10 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // SECTION 1: ENVELOPE
   // ============================================
   const envelopeWrapper = document.querySelector('.envelope-wrapper');
+  const bgMusic = document.getElementById('bg-music');
   if (envelopeWrapper) {
     envelopeWrapper.addEventListener('click', () => {
       if (envelopeWrapper.classList.contains('opened')) return;
       envelopeWrapper.classList.add('opened');
+      if (bgMusic) {
+        bgMusic.volume = 0.4;
+        bgMusic.play().catch(() => {});
+      }
       setTimeout(() => nextSection(), 1200);
     });
   }
@@ -202,70 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     huntStep = step;
   }
 
-  // "Found it!" buttons
-  document.querySelectorAll('.btn-hunt-found').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.hunt-card');
-      const response = card.querySelector('.hunt-card-response');
-      const nextBtn = card.querySelector('.btn-hunt-next');
-
-      if (response) {
-        response.classList.add('visible');
-      }
-      btn.style.display = 'none';
-      if (nextBtn) {
-        setTimeout(() => nextBtn.classList.add('visible'), 600);
-      }
-    });
-  });
-
   // Next step buttons
   document.querySelectorAll('.btn-hunt-next').forEach(btn => {
     btn.addEventListener('click', () => {
       showHuntStep(huntStep + 1);
     });
   });
-
-  // Passcode input (Step 3)
-  const huntInput = document.querySelector('.hunt-input');
-  const huntSubmit = document.querySelector('.hunt-submit');
-  if (huntSubmit && huntInput) {
-    const submitAnswer = () => {
-      const answer = huntInput.value.trim().toLowerCase();
-      if (answer === 'lime') {
-        // Correct!
-        const card = huntInput.closest('.hunt-card');
-        const response = card.querySelector('.hunt-card-response');
-        if (response) {
-          response.textContent = 'Yes! You got it! 🎉';
-          response.classList.add('visible');
-        }
-        huntInput.disabled = true;
-        huntSubmit.disabled = true;
-        const nextBtn = card.querySelector('.btn-hunt-next');
-        if (nextBtn) {
-          setTimeout(() => nextBtn.classList.add('visible'), 600);
-        }
-      } else {
-        // Wrong
-        huntInput.classList.add('shake');
-        const card = huntInput.closest('.hunt-card');
-        const response = card.querySelector('.hunt-card-response');
-        if (response) {
-          response.textContent = 'Look again! 👀';
-          response.classList.add('visible');
-        }
-        setTimeout(() => huntInput.classList.remove('shake'), 500);
-        huntInput.value = '';
-        huntInput.focus();
-      }
-    };
-
-    huntSubmit.addEventListener('click', submitAnswer);
-    huntInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') submitAnswer();
-    });
-  }
 
   // Final reveal (Step 4) — trigger confetti
   const huntSection = document.getElementById('hunt');
@@ -405,9 +352,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
+    renderWheel();
+  }
+
+  function renderWheel() {
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    const size = canvas.width / dpr;
     const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.scale(dpr, dpr);
-    drawWheel(ctx, rect.width);
+    drawWheel(ctx, size);
   }
 
   function spinWheel() {
@@ -446,15 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const eased = 1 - Math.pow(1 - progress, 3);
 
       currentRotation = startRotation + totalRotation * eased;
-
-      const ctx = canvas.getContext('2d');
-      const dpr = window.devicePixelRatio || 1;
-      const size = canvas.width / dpr;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
-      ctx.scale(dpr, dpr);
-      drawWheel(ctx, size);
-      ctx.restore();
+      renderWheel();
 
       if (progress < 1) {
         requestAnimationFrame(animate);

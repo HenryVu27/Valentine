@@ -219,40 +219,31 @@
 
       <div class="hunt-cards-container">
 
-        <!-- Step 1: Her Room -->
+        <!-- Step 1: Her Room - Table -->
         <div class="hunt-card">
           <p class="hunt-card-step">Step 1 of 4</p>
-          <p class="hunt-card-text">Start in your room... look under your pillow!</p>
-          <p class="hunt-card-response">Not here! But nice try 😄</p>
-          <button class="btn-hunt-found btn-continue">Found it!</button>
-          <button class="btn-hunt-next">Next Clue →</button>
+          <p class="hunt-card-text">Start in your room... check the table!</p>
+          <button class="btn-hunt-next visible">Next Clue →</button>
         </div>
 
-        <!-- Step 2: His Room -->
+        <!-- Step 2: Her Room - Pillow -->
         <div class="hunt-card">
           <p class="hunt-card-step">Step 2 of 4</p>
-          <p class="hunt-card-text">Now check my room... look on the nightstand!</p>
-          <p class="hunt-card-response">Getting warmer... but not quite! 🔥</p>
-          <button class="btn-hunt-found btn-continue">Found it!</button>
-          <button class="btn-hunt-next">Next Clue →</button>
+          <p class="hunt-card-text">Now look under your pillow!</p>
+          <button class="btn-hunt-next visible">Next Clue →</button>
         </div>
 
         <!-- Step 3: Kitchen / Fridge -->
         <div class="hunt-card">
           <p class="hunt-card-step">Step 3 of 4</p>
-          <p class="hunt-card-text">Head to the kitchen. Open the fridge. What's on the left door?</p>
-          <p class="hunt-card-response"></p>
-          <div class="hunt-input-group">
-            <input type="text" class="hunt-input" placeholder="Type what you see..." autocomplete="off">
-            <button class="hunt-submit">Check</button>
-          </div>
-          <button class="btn-hunt-next">Next Clue →</button>
+          <p class="hunt-card-text">Head to the kitchen and check the fridge door!</p>
+          <button class="btn-hunt-next visible">Next Clue →</button>
         </div>
 
         <!-- Step 4: Final Reveal -->
         <div class="hunt-card">
           <p class="hunt-card-step">Step 4 of 4</p>
-          <p class="hunt-card-text">Go back to your room... and check under the bed! 🎁</p>
+          <p class="hunt-card-text">Go back to your room... and check the nightstand drawer! 🎁</p>
           <img class="hunt-final-photo loaded" src="Photos/Photo/IMG_8029.JPG" alt="Surprise!">
           <button class="btn-hunt-continue btn-continue visible" style="margin-top: 20px;">
             One more surprise &hearts;
@@ -284,6 +275,10 @@
       <p class="roulette-result"></p>
     </div>
   </section>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="Romantic Valentine Melody.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="js/main.js"></script>
 </body>
